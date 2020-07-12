@@ -1,4 +1,4 @@
-package br.com.biblioteca.biblioteca;
+package br.com.biblioteca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
