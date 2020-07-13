@@ -4,6 +4,9 @@ import br.com.biblioteca.persistencia.model.Livro;
 import br.com.biblioteca.persistencia.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class LivroService {
 
@@ -15,5 +18,21 @@ public class LivroService {
 
     public Livro cadastrar(Livro livro) {
         return livroRepository.save(livro);
+    }
+    public List<Livro> obterTodos(){
+        return livroRepository.findAll();
+    };
+
+    public Optional<Livro> obterPorId(long livroId) {
+        return livroRepository.findById(livroId);
+    }
+    public Livro alterar(long livroId, Livro livro){
+
+        livro.setId(livroId);
+        livro = cadastrar(livro);
+        return livroRepository.save(livro);
+    }
+    public void excluir(long livroId){
+        livroRepository.deleteById(livroId);
     }
 }
