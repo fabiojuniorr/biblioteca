@@ -4,6 +4,7 @@ import br.com.biblioteca.persistencia.model.Livro;
 import br.com.biblioteca.service.LivroService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +22,13 @@ public class LivroController {
     public Livro cadastrar(@RequestBody Livro livro) {
         return livroService.cadastrar(livro);
     }
+
     //    Endpoint para obter todos os livros
     @GetMapping
     public List<Livro> obterTodos(){
         return livroService.obterTodos();
     }
+
     //    Endpoint para obter livro por ID
     @GetMapping(value = "/{livroId}")
     public Optional<Livro> obterPorId(@PathVariable Long livroId){
@@ -34,6 +37,11 @@ public class LivroController {
         return livro;
     }
     //    Endpoint para obter o livro por ISBN
+    @GetMapping(value = "/isbn/{livroIsbn}")
+    public Optional<Livro> obterPorIsnb(@PathVariable Integer livroIsbn){
+        Optional<Livro> livro = livroService.obterPorIsbn(livroIsbn);
+        return livro;
+    }
 
     //    Endpoint para alterar um livro
     @PutMapping(value = "/{livroId}")
@@ -41,6 +49,7 @@ public class LivroController {
         livroService.alterar(livroId, livro);
         return livro;
     }
+
     //    Endpoint para excluir um livro
     @DeleteMapping(value = "/{livroId}")
     public void excluir(@PathVariable long livroId){

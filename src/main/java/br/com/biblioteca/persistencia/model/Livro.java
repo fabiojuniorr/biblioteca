@@ -1,6 +1,6 @@
 package br.com.biblioteca.persistencia.model;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -12,11 +12,6 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     private String nome;
     private Integer isbn;
 

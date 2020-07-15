@@ -4,6 +4,8 @@ import br.com.biblioteca.persistencia.model.Livro;
 import br.com.biblioteca.persistencia.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
+
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class LivroService {
 
     private LivroRepository livroRepository;
+    private EntityManager manager;
 
     public LivroService(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
@@ -26,12 +29,18 @@ public class LivroService {
     public Optional<Livro> obterPorId(long livroId) {
         return livroRepository.findById(livroId);
     }
+    public Optional<Livro> obterPorIsbn(Integer livroIsbn) {
+        return livroRepository.findByIsbn(livroIsbn);
+//        return null;
+    }
+
     public Livro alterar(long livroId, Livro livro){
 
         livro.setId(livroId);
         livro = cadastrar(livro);
         return livroRepository.save(livro);
     }
+
     public void excluir(long livroId){
         livroRepository.deleteById(livroId);
     }
