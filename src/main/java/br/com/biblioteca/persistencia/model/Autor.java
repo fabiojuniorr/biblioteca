@@ -5,12 +5,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "TB_CATEGORIA")
-public class Categoria {
+@Table(name = "TB_AUTOR")
+public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private String descricao;
+    private String nomeAutor;
 }

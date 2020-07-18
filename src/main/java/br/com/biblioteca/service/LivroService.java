@@ -13,7 +13,6 @@ import java.util.Optional;
 public class LivroService {
 
     private LivroRepository livroRepository;
-    private EntityManager manager;
 
     public LivroService(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
@@ -29,7 +28,7 @@ public class LivroService {
     public Optional<Livro> obterPorId(long livroId) {
         return livroRepository.findById(livroId);
     }
-    public Optional<Livro> obterPorIsbn(Integer livroIsbn) {
+    public Optional<Livro> obterPorIsbn(long livroIsbn) {
         return livroRepository.findByIsbn(livroIsbn);
 //        return null;
     }

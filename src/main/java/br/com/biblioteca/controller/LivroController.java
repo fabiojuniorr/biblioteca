@@ -1,10 +1,11 @@
 package br.com.biblioteca.controller;
 
+import br.com.biblioteca.persistencia.model.Autor;
 import br.com.biblioteca.persistencia.model.Livro;
+import br.com.biblioteca.service.AutorService;
 import br.com.biblioteca.service.LivroService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,13 +14,17 @@ import java.util.Optional;
 public class LivroController {
 
     private LivroService livroService;
+    private AutorService autorService;
 
-    public LivroController(LivroService livroService) {
+    public LivroController(LivroService livroService, AutorService autorService) {
         this.livroService = livroService;
+        this.autorService = autorService;
     }
     //    Endpoint para cadastrar os livros
     @PostMapping
     public Livro cadastrar(@RequestBody Livro livro) {
+        Autor autor = livro.getAutor();
+        autorService.cadastrar(autor);
         return livroService.cadastrar(livro);
     }
 
@@ -31,14 +36,14 @@ public class LivroController {
 
     //    Endpoint para obter livro por ID
     @GetMapping(value = "/{livroId}")
-    public Optional<Livro> obterPorId(@PathVariable Long livroId){
+    public Optional<Livro> obterPorId(@PathVariable long livroId){
         Optional<Livro> livro = livroService.obterPorId(livroId);
 
         return livro;
     }
     //    Endpoint para obter o livro por ISBN
     @GetMapping(value = "/isbn/{livroIsbn}")
-    public Optional<Livro> obterPorIsnb(@PathVariable Integer livroIsbn){
+    public Optional<Livro> obterPorIsnb(@PathVariable long livroIsbn){
         Optional<Livro> livro = livroService.obterPorIsbn(livroIsbn);
         return livro;
     }
